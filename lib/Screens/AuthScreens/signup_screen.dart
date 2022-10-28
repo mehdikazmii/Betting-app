@@ -1,10 +1,14 @@
 // ignore_for_file: avoid_print
 
-import 'package:betting_app/AuthScreens/email_verification_screen.dart';
+import 'package:betting_app/Models/user_registration.dart';
+import 'package:betting_app/Screens/AuthScreens/add_photo_screen.dart';
+import 'package:betting_app/helpers/screen_navigation.dart';
+import 'package:betting_app/helpers/utils.dart';
 import 'package:betting_app/widgets/custom_textfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../helpers/constant.dart';
-import '../widgets/custom_button.dart';
+import '../../helpers/constant.dart';
+import '../../widgets/custom_button.dart';
 import 'login_screen.dart';
 
 class SignpScreen extends StatefulWidget {
@@ -17,23 +21,15 @@ class SignpScreen extends StatefulWidget {
 
 class _SignpScreenState extends State<SignpScreen> {
   bool isChecked = false;
-  final nameController = TextEditingController();
+  final cityController = TextEditingController();
   final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPassController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
-  // final user = FirebaseAuth.instance;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  UserRegistration userRegistration = UserRegistration();
   @override
   void dispose() {
     emailController.dispose();
-    nameController.dispose();
     userNameController.dispose();
     passwordController.dispose();
     confirmPassController.dispose();
@@ -53,7 +49,6 @@ class _SignpScreenState extends State<SignpScreen> {
     return Scaffold(
       backgroundColor: black,
       body: Form(
-        key: formKey,
         child: Container(
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.only(top: 25),
@@ -88,14 +83,14 @@ class _SignpScreenState extends State<SignpScreen> {
                 ),
                 const SizedBox(height: 15),
                 CustomTextField(
-                  controller: nameController,
+                  controller: userNameController,
                   icon: Icons.abc_rounded,
                   hint: 'your Username',
                   label: 'Username',
                   textInputAction: TextInputAction.next,
                 ),
                 CustomTextField(
-                  controller: userNameController,
+                  controller: cityController,
                   icon: Icons.location_city,
                   hint: 'your city',
                   label: 'City',
@@ -123,59 +118,23 @@ class _SignpScreenState extends State<SignpScreen> {
                   label: 'Confirm Password',
                   suffixIcon: Icons.remove_red_eye_outlined,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     Checkbox(
-                //         activeColor: Colors.white,
-                //         checkColor: Colors.black,
-                //         fillColor: MaterialStateProperty.all(Colors.white),
-                //         value: isChecked,
-                //         onChanged: (b) {
-                //           setState(() {
-                //             isChecked = b ?? false;
-                //           });
-                //         }),
-                //     const Expanded(
-                //       child: Text.rich(TextSpan(
-                //           text: 'By checking this you agree to ',
-                //           style: TextStyle(fontSize: 13, color: Colors.white),
-                //           children: <InlineSpan>[
-                //             TextSpan(
-                //               text: 'Privacy Policy ',
-                //               style: TextStyle(
-                //                   fontSize: 13,
-                //                   fontWeight: FontWeight.bold,
-                //                   color: Colors.white),
-                //             ),
-                //             TextSpan(
-                //               text: 'and ',
-                //               style:
-                //                   TextStyle(fontSize: 13, color: Colors.white),
-                //             ),
-                //             TextSpan(
-                //               text: 'Terms & Conditions',
-                //               style: TextStyle(
-                //                   fontSize: 13,
-                //                   fontWeight: FontWeight.bold,
-                //                   color: Colors.white),
-                //             )
-                //           ])),
-                //     ),
-                //   ],
-                // ),
                 const SizedBox(height: 20),
                 CustomButton(
-                  buttonName: 'Sign up',
+                  buttonName: 'Continue',
                   width: 300,
                   height: 50,
                   function: () {
-                    // String name = nameController.text.trim();
-                    // dynamic userName = userNameController.text;
-                    // name != '' && userName != ''
-                    //     ? signUp(name, userName)
-                    //     : showText('Add your name and User-Name');
-                    Navigator.pushNamed(context, EmailVerificationScreen.id);
+                    userRegistration.username = userNameController.text.trim();
+                    userRegistration.email = emailController.text.trim();
+                    userRegistration.city = cityController.text.trim();
+                    userRegistration.password = passwordController.text.trim();
+                    userRegistration.username.isEmpty ||
+                            userRegistration.city.isEmpty ||
+                            userRegistration.email.isEmpty ||
+                            userRegistration.password.isEmpty
+                        ? showSnackBar('Fill all the fields', context)
+                        : changeScreen(context,
+                            AddPhotoScreen(userRegistration: userRegistration));
                   },
                 ),
                 const SizedBox(height: 15),
@@ -216,65 +175,4 @@ class _SignpScreenState extends State<SignpScreen> {
       ),
     );
   }
-
-  // Future signUp(String name, dynamic userName) async {
-  //   final isValid = formKey.currentState!.validate();
-  //   if (!isValid) return;
-  //   bool flag = true;
-  //   flag == true
-  //       ? showDialog(
-  //           context: context,
-  //           barrierDismissible: false,
-  //           builder: (context) => const Center(
-  //                 child: CircularProgressIndicator(
-  //                   color: Colors.white,
-  //                 ),
-  //               ))
-  //       : null;
-  //   try {
-  //     await FirebaseAuth.instance
-  //         .createUserWithEmailAndPassword(
-  //             email: emailController.text.trim(),
-  //             password: passwordController.text.trim())
-  //         .then(
-  //       (value) async {
-  //         flag = false;
-  //         String email = user.currentUser!.email!;
-  //         dynamic uid = user.currentUser!.uid;
-  //         Map<String, dynamic> userInfo = {
-  //           'uid': uid,
-  //           'name': name,
-  //           'userName': userName,
-  //           'email': email,
-  //         };
-  //         Navigator.push(
-  //           context,
-  //           MaterialPageRoute(
-  //             builder: ((builder) => EmailVerificationScreen(
-  //                   user: userInfo,
-  //                 )),
-  //           ),
-  //         );
-  //       },
-  //     );
-  //   } on FirebaseException catch (e) {
-  //     print(e);
-  //     setState(() {
-  //       flag = false;
-  //     });
-  //     showText(e.message!);
-  //   }
-  // }
-
-  // showText(String text) {
-  //   showToast(
-  //     text,
-  //     duration: const Duration(seconds: 2),
-  //     position: ToastPosition.center,
-  //     backgroundColor: Colors.white.withOpacity(0.8),
-  //     radius: 3.0,
-  //     textStyle: const TextStyle(fontSize: 18.0, color: Colors.black),
-  //     textPadding: const EdgeInsets.all(10),
-  //   );
-  // }
 }

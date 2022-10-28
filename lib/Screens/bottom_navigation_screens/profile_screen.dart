@@ -1,9 +1,18 @@
+import 'package:betting_app/Screens/bottom_navigation_screens/profile_sub_screens/saved_bet_screen.dart';
 import 'package:betting_app/helpers/constant.dart';
+import 'package:betting_app/helpers/screen_navigation.dart';
+import 'package:betting_app/provider/user_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../entity/app_user.dart';
+import '../../widgets/custom_round_button.dart';
+
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key, required this.user, required this.userProvider});
   static String id = 'profile';
+  AppUser? user;
+  UserProvider? userProvider;
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -12,6 +21,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    print(widget.user!.profilePhotoPath);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     int i = 0;
@@ -34,15 +44,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const ClipRRect(
-                                child: Image(
-                                  image: AssetImage('assets/girl1.png'),
-                                  height: 80,
-                                  width: 80,
-                                ),
-                              ),
+                              widget.user!.profilePhotoPath == null
+                                  ? const CircleAvatar(
+                                      backgroundColor: Colors.grey,
+                                      radius: 40,
+                                    )
+                                  : CircleAvatar(
+                                      backgroundImage:
+                                          CachedNetworkImageProvider(
+                                              widget.user!.profilePhotoPath!),
+                                      backgroundColor: Colors.grey,
+                                      radius: 40,
+                                    ),
                               Text(
-                                'Regina Pablo',
+                                widget.user != null
+                                    ? widget.user!.username!
+                                    : 'username',
                                 style: TextStyle(color: white, fontSize: 15),
                               ),
                               const Text(
@@ -130,6 +147,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     IconButton(
+                                      onPressed: () => changeScreen(
+                                          context, SavedBetScreen()),
+                                      icon: Icon(
+                                          Icons.collections_bookmark_rounded,
+                                          color: white),
+                                    ),
+                                    IconButton(
                                         onPressed: () {},
                                         icon: Icon(
                                           Icons.send_outlined,
@@ -211,40 +235,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   )
                 ],
               ))),
-    );
-  }
-}
-
-class CRoundButton extends StatelessWidget {
-  const CRoundButton({
-    Key? key,
-    required this.function,
-    required this.text,
-    required this.active,
-  }) : super(key: key);
-  final Function function;
-  final String text;
-  final bool active;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        function();
-      },
-      child: Container(
-        alignment: Alignment.center,
-        width: 150,
-        height: 45,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        decoration: BoxDecoration(
-            color: active ? blue : Colors.grey,
-            borderRadius: BorderRadius.circular(20)),
-        child: Text(
-          text,
-          style: TextStyle(color: white, fontSize: 18),
-        ),
-      ),
     );
   }
 }

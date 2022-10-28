@@ -1,11 +1,14 @@
+import 'package:betting_app/Screens/DrawerScreens/referal_code_screen.dart';
+import 'package:betting_app/Screens/DrawerScreens/settings_screen.dart';
+import 'package:betting_app/Screens/bottom_navigation_screens/invite_sub_screens/invite_friends.dart';
 import 'package:flutter/material.dart';
 
-import 'AuthScreens/email_verification_screen.dart';
-import 'AuthScreens/forgot_password_screen.dart';
-import 'AuthScreens/login_screen.dart';
-import 'AuthScreens/signup_screen.dart';
-import 'AuthScreens/success_screen.dart';
-import 'bottom_navigation_screens/bottom_navigation_screen.dart';
+import 'Screens/AuthScreens/email_verification_screen.dart';
+import 'Screens/AuthScreens/login_screen.dart';
+import 'Screens/AuthScreens/signup_screen.dart';
+import 'Screens/AuthScreens/success_screen.dart';
+import 'Screens/AuthScreens/forgot_password_screen.dart';
+import 'Screens/bottom_navigation_screens/bottom_navigation_screen.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
   BottomNavigationScreen.id: (context) => const BottomNavigationScreen(),
@@ -14,4 +17,7 @@ Map<String, Widget Function(BuildContext)> routes = {
   EmailVerificationScreen.id: (context) => const EmailVerificationScreen(),
   SuccessScreen.id: (context) => const SuccessScreen(),
   ForgotPasswordScreen.id: (context) => ForgotPasswordScreen(),
+  SettingScreen.id: (context) => const SettingScreen(),
+  InviteScreen.id: (context) => const InviteScreen(),
+  InviteFriends.id: (context) => const InviteFriends(),
 };

@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:betting_app/AuthScreens/success_screen.dart';
+import 'package:betting_app/Screens/AuthScreens/success_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../helpers/constant.dart';
-import '../widgets/custom_button.dart';
+import '../../helpers/constant.dart';
+import '../../widgets/custom_button.dart';
 import 'login_screen.dart';
 
 class EmailVerificationScreen extends StatefulWidget {

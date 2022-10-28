@@ -39,6 +39,17 @@ dependencies:
   email_validator: ^2.0.1
   flutter_native_splash: ^2.1.6
   flutter_launcher_icons: ^0.10.0
+  flutter_switch: ^0.3.2
+  image_picker: ^0.8.5+3
+  firebase_storage: ^10.3.10
+  firebase_core: ^1.24.0
+  firebase_auth: ^3.7.0
+  cloud_firestore: ^3.4.6
+  shared_preferences: ^2.0.15
+  provider: ^6.0.3
+  local_auth: ^2.1.2
+  cached_network_image: ^3.2.2
+  date_time_picker: ^2.1.0
 
 flutter_native_splash:
   color: "#FFD832"

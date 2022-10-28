@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../bottom_navigation_screens/bottom_navigation_screen.dart';
-import '../helpers/constant.dart';
+import '../../helpers/constant.dart';
 
 class SuccessScreen extends StatefulWidget {
   const SuccessScreen({Key? key}) : super(key: key);

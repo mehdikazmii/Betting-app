@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_print
 
-import 'package:betting_app/AuthScreens/login_screen.dart';
+import 'package:betting_app/Screens/AuthScreens/login_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../helpers/constant.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_textfield.dart';
+import '../../helpers/constant.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/custom_textfield.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({Key? key}) : super(key: key);
