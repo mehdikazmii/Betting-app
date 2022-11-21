@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_print
 
-import 'package:betting_app/Screens/bottom_navigation_screens/invite_sub_screens/invite_friends.dart';
+import 'package:betting_app/Screens/bottom_navigation_screens/bottom_navigation_screen.dart';
+import 'package:betting_app/Screens/bottom_navigation_screens/earn_screens/invite_friends.dart';
+import 'package:betting_app/Screens/bottom_navigation_screens/search_screens/search_screen.dart';
 import 'package:betting_app/helpers/constant.dart';
 import 'package:betting_app/helpers/screen_navigation.dart';
 import 'package:betting_app/helpers/utils.dart';
@@ -10,11 +12,11 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import '../../Models/add_bet.dart';
-import '../../entity/app_user.dart';
-import '../../widgets/custom_round_button.dart';
-import '../../widgets/custom_text.dart';
-import '../../widgets/input_dialog.dart';
+import '../../../Models/add_bet.dart';
+import '../../../entity/app_user.dart';
+import '../../../widgets/custom_round_button.dart';
+import '../../../widgets/custom_text.dart';
+import '../../../widgets/input_dialog.dart';
 
 class AddBetScreen extends StatefulWidget {
   AddBetScreen({super.key, required this.user});
@@ -41,6 +43,47 @@ class _AddBetScreenState extends State<AddBetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+            child: Image(
+          image: AssetImage('assets/pbets.jpg'),
+          height: 25,
+        )),
+        shadowColor: Colors.black,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+            icon: Icon(
+              Icons.search,
+              color: yellow,
+              size: 25,
+            ),
+            onPressed: () => changeScreen(
+                context,
+                SearchScreen(
+                  user: widget.user,
+                ))),
+        actions: [
+          Row(
+            children: [
+              Text(
+                widget.user!.wallet.toString(),
+                style: TextStyle(
+                    color: white, fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                  onPressed: () {},
+                  icon: Image(
+                    image: const AssetImage(
+                      'assets/black-coin.png',
+                    ),
+                    color: yellow,
+                    height: 20,
+                    width: 20,
+                  ))
+            ],
+          )
+        ],
+      ),
       backgroundColor: black,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
@@ -194,7 +237,7 @@ class _AddBetScreenState extends State<AddBetScreen> {
                             IconButton(
                                 onPressed: () => setState(() {
                                       addOption = false;
-                                      multiplier = '1/3';
+                                      multiplier = '1.5';
                                     }),
                                 icon: CircleAvatar(
                                     backgroundColor: blue,
@@ -230,7 +273,7 @@ class _AddBetScreenState extends State<AddBetScreen> {
                                       onSavePressed: (value) {
                                         setState(() {
                                           option3 = value;
-                                          addBet.option1 = value;
+                                          addBet.option3 = value;
                                         });
                                       },
                                       labelText: 'Option',
@@ -321,6 +364,7 @@ class _AddBetScreenState extends State<AddBetScreen> {
                   addBet.def = defController.text.trim();
                   addBet.name = widget.user!.username!;
                   addBet.uid = auth.currentUser!.uid;
+                  addBet.multiplier = multiplier;
                   addBet.option1.isNotEmpty &&
                           addBet.option2.isNotEmpty &&
                           addBet.def.isNotEmpty &&
@@ -347,11 +391,11 @@ class _AddBetScreenState extends State<AddBetScreen> {
     print(auth.currentUser!.uid);
 
     try {
-      instance
-          .collection('publish')
-          .doc()
-          .set(addBet.toMap())
-          .then((value) => showSnackBar('The bet has been published', context));
+      instance.collection('publish').doc().set(addBet.toMap()).then((value) {
+        showSnackBar('The bet has been published', context);
+        Navigator.pop(context);
+        changeScreen(context, const BottomNavigationScreen());
+      });
     } catch (e) {
       print(e.toString());
       showSnackBar(e.toString(), context);

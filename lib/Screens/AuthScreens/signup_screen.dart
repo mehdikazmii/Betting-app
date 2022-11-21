@@ -21,7 +21,7 @@ class SignpScreen extends StatefulWidget {
 
 class _SignpScreenState extends State<SignpScreen> {
   bool isChecked = false;
-  final cityController = TextEditingController();
+  final countryController = TextEditingController();
   final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -85,15 +85,15 @@ class _SignpScreenState extends State<SignpScreen> {
                 CustomTextField(
                   controller: userNameController,
                   icon: Icons.abc_rounded,
-                  hint: 'your Username',
+                  hint: 'upto 50 Characters',
                   label: 'Username',
                   textInputAction: TextInputAction.next,
                 ),
                 CustomTextField(
-                  controller: cityController,
+                  controller: countryController,
                   icon: Icons.location_city,
-                  hint: 'your city',
-                  label: 'City',
+                  hint: 'your country',
+                  label: 'Country',
                   textInputAction: TextInputAction.next,
                 ),
                 CustomTextField(
@@ -126,15 +126,20 @@ class _SignpScreenState extends State<SignpScreen> {
                   function: () {
                     userRegistration.username = userNameController.text.trim();
                     userRegistration.email = emailController.text.trim();
-                    userRegistration.city = cityController.text.trim();
+                    userRegistration.country = countryController.text.trim();
                     userRegistration.password = passwordController.text.trim();
                     userRegistration.username.isEmpty ||
-                            userRegistration.city.isEmpty ||
+                            userRegistration.country.isEmpty ||
                             userRegistration.email.isEmpty ||
                             userRegistration.password.isEmpty
                         ? showSnackBar('Fill all the fields', context)
-                        : changeScreen(context,
-                            AddPhotoScreen(userRegistration: userRegistration));
+                        : userRegistration.username.characters.length <= 50
+                            ? changeScreen(
+                                context,
+                                AddPhotoScreen(
+                                    userRegistration: userRegistration))
+                            : showSnackBar(
+                                'UserName can have max 50 characters', context);
                   },
                 ),
                 const SizedBox(height: 15),

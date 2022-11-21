@@ -50,6 +50,9 @@ dependencies:
   local_auth: ^2.1.2
   cached_network_image: ^3.2.2
   date_time_picker: ^2.1.0
+  numberpicker: ^2.1.1
+  card_swiper: ^2.0.4
+  badges: ^2.0.3
 
 flutter_native_splash:
   color: "#FFD832"

@@ -5,15 +5,21 @@ class AppUser {
   String? username;
   String? profilePhotoPath;
   String bio = "";
-  String? city;
+  String? country;
   String? email;
+  double wallet = 0;
+  int level = 1;
+  bool verified = false;
+  bool refered = false;
+  bool private = false;
 
-  AppUser(
-      {required this.id,
-      required this.username,
-      required this.profilePhotoPath,
-      required this.city,
-      required this.email});
+  AppUser({
+    required this.id,
+    required this.username,
+    required this.profilePhotoPath,
+    required this.country,
+    required this.email,
+  });
 
   AppUser.fromSnapshot(DocumentSnapshot snapshot) {
     id = snapshot['id'];
@@ -21,7 +27,12 @@ class AppUser {
     email = snapshot['email'];
     profilePhotoPath = snapshot['profile_photo_path'];
     bio = snapshot.get('bio') ?? '';
-    city = snapshot['city'];
+    country = snapshot['country'];
+    level = snapshot['level'];
+    wallet = double.parse(snapshot['wallet'].toString());
+    verified = snapshot['verified'];
+    refered = snapshot['refered'];
+    private = snapshot['private'];
   }
 
   Map<String, dynamic> toMap() {
@@ -31,7 +42,12 @@ class AppUser {
       'email': email,
       'profile_photo_path': profilePhotoPath,
       'bio': bio,
-      'city': city
+      'country': country,
+      'wallet': wallet,
+      'level': level,
+      'verified': verified,
+      'private': private,
+      'refered': refered
     };
   }
 }

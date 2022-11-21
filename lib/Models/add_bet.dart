@@ -8,6 +8,8 @@ class AddBet {
   String comment = '';
   String name = '';
   DateTime? dateTime;
+  String multiplier = '';
+  String totalBet = '';
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -20,6 +22,8 @@ class AddBet {
       'comment': comment,
       'dateTime': dateTime,
       'name': name,
+      'multiplier': multiplier,
+      'totalBet': totalBet,
       "publishTime": DateTime.now()
     };
   }

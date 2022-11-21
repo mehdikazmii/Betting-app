@@ -42,11 +42,12 @@ class UserProvider extends ChangeNotifier {
       if (response is Success<String>) {
         String profilePhotoUrl = response.value;
         AppUser user = AppUser(
-            id: id,
-            username: userRegistration.username,
-            email: userRegistration.email,
-            profilePhotoPath: profilePhotoUrl,
-            city: userRegistration.city);
+          id: id,
+          username: userRegistration.username,
+          email: userRegistration.email,
+          profilePhotoPath: profilePhotoUrl,
+          country: userRegistration.country,
+        );
         _databaseSource.addUser(user);
         SharedPreferencesUtil.setUserId(id);
         _user = _user;
@@ -90,6 +91,8 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> logoutUser() async {
     _user = null;
+    notifyListeners();
     await SharedPreferencesUtil.removeUserId();
+    notifyListeners();
   }
 }

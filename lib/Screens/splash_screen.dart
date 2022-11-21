@@ -1,6 +1,8 @@
 import 'package:betting_app/Screens/AuthScreens/login_screen.dart';
+import 'package:betting_app/entity/app_user.dart';
 import 'package:betting_app/helpers/constant.dart';
 import 'package:betting_app/helpers/screen_navigation.dart';
+import 'package:betting_app/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/shared_preferences_utils.dart';
@@ -16,6 +18,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  UserProvider userProvider = UserProvider();
   @override
   void initState() {
     super.initState();

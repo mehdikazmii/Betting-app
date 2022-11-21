@@ -1,5 +1,5 @@
 class UserRegistration {
-  String city = '';
+  String country = '';
   String username = '';
   String email = '';
   String password = '';
