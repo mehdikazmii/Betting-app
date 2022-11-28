@@ -3,10 +3,7 @@
 import 'package:betting_app/Screens/bottom_navigation_screens/add_bet_screens/add_bet_screen.dart';
 import 'package:betting_app/Screens/bottom_navigation_screens/earn_screens/earn_screen.dart';
 import 'package:betting_app/Screens/bottom_navigation_screens/prize_screens/prize_screen.dart';
-import 'package:betting_app/Screens/bottom_navigation_screens/search_screens/search_screen.dart';
-import 'package:betting_app/helpers/screen_navigation.dart';
 import 'package:betting_app/widgets/custom_modal_progress_hud.dart';
-import 'package:betting_app/widgets/drawer.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,16 +14,21 @@ import 'home_screens/home_screen.dart';
 import 'profile_screens/profile_screen.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
-  const BottomNavigationScreen({Key? key}) : super(key: key);
+  const BottomNavigationScreen({Key? key, this.pageIndex}) : super(key: key);
   static String id = 'navigaationScreenId';
-
+  final int? pageIndex;
   @override
   State<BottomNavigationScreen> createState() => _BottomBarScreenState();
 }
 
 class _BottomBarScreenState extends State<BottomNavigationScreen> {
-  final PageController controller = PageController(initialPage: 0);
   var pageIndex = 0;
+  PageController? controller;
+  @override
+  void initState() {
+    controller = PageController(initialPage: widget.pageIndex ?? 0);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +68,11 @@ class _BottomBarScreenState extends State<BottomNavigationScreen> {
             selectedColor: yellow,
             strokeColor: Colors.black12,
             elevation: 16,
-            currentIndex: pageIndex,
+            currentIndex: widget.pageIndex ?? pageIndex,
             onTap: (index) {
               setState(() {
                 pageIndex = index;
-                controller.animateToPage(pageIndex,
+                controller!.animateToPage(pageIndex,
                     duration: const Duration(milliseconds: 100),
                     curve: Curves.linearToEaseOut);
               });
@@ -116,18 +118,7 @@ class _BottomBarScreenState extends State<BottomNavigationScreen> {
                                   profilePhotoPath: '',
                                   country: '',
                                   email: '')),
-                    )
-                    // : PageView(
-                    //     scrollDirection: Axis.horizontal,
-                    //     controller: controller,
-                    //     onPageChanged: (index) {
-                    //       setState(() {
-                    //         pageIndex = index;
-                    //       });
-                    //     },
-                    //     children: screens(),
-                    //   ),
-                    );
+                    ));
               });
         }));
   }

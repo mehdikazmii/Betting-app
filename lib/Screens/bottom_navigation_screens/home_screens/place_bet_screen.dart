@@ -8,7 +8,6 @@ import 'package:betting_app/widgets/custom_modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:numberpicker/numberpicker.dart';
 import '../../../helpers/screen_navigation.dart';
 import '../../../widgets/custom_round_button.dart';
 import '../../../widgets/custom_text.dart';

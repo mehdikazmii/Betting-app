@@ -1,7 +1,9 @@
 // ignore_for_file: avoid_print
 
+import 'package:betting_app/Screens/bottom_navigation_screens/bottom_navigation_screen.dart';
 import 'package:betting_app/entity/app_user.dart';
 import 'package:betting_app/helpers/constant.dart';
+import 'package:betting_app/helpers/screen_navigation.dart';
 import 'package:betting_app/helpers/utils.dart';
 import 'package:betting_app/widgets/custom_modal_progress_hud.dart';
 import 'package:betting_app/widgets/custom_text.dart';
@@ -219,6 +221,11 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
                 _isLoading = false;
               });
               Navigator.pop(context);
+              changeScreen(
+                  context,
+                  const BottomNavigationScreen(
+                    pageIndex: 3,
+                  ));
             });
           });
         });

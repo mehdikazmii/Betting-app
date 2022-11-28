@@ -388,24 +388,24 @@ class _BetSearchCardState extends State<BetSearchCard> {
                       ),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            CustomText(
-                              text: '12',
-                              color: blue,
-                              size: 25,
-                              weight: FontWeight.bold,
-                            ),
-                            const CustomText(
-                              text: 'Sub',
-                              weight: FontWeight.bold,
-                              size: 18,
-                            )
-                          ],
-                        ),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.end,
+                        //   children: [
+                        //     CustomText(
+                        //       text: '12',
+                        //       color: blue,
+                        //       size: 25,
+                        //       weight: FontWeight.bold,
+                        //     ),
+                        //     const CustomText(
+                        //       text: 'Sub',
+                        //       weight: FontWeight.bold,
+                        //       size: 18,
+                        //     )
+                        //   ],
+                        // ),
                         const SizedBox(
                           width: 30,
                         ),

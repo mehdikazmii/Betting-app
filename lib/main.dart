@@ -1,4 +1,3 @@
-import 'package:betting_app/Screens/AuthScreens/login_screen.dart';
 import 'package:betting_app/Screens/splash_screen.dart';
 import 'package:betting_app/provider/user_provider.dart';
 import 'package:betting_app/routes.dart';
