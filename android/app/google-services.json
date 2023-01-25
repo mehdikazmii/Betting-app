@@ -7,9 +7,67 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:444235615979:android:d94ee30ad214db2d7cb8ae",
+        "android_client_info": {
+          "package_name": "com.example.betting_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444235615979-86baeolht5fi9egbdhfr45all8bv26pu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq0jx82Rb0yEqA5zrlOthGRWKX4LZJiH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444235615979-86baeolht5fi9egbdhfr45all8bv26pu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:444235615979:android:4d29edf0d6acf3707cb8ae",
         "android_client_info": {
           "package_name": "com.example.betting_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444235615979-86baeolht5fi9egbdhfr45all8bv26pu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq0jx82Rb0yEqA5zrlOthGRWKX4LZJiH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444235615979-86baeolht5fi9egbdhfr45all8bv26pu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444235615979:android:f441faf5a77b792b7cb8ae",
+        "android_client_info": {
+          "package_name": "com.p_bets"
         }
       },
       "oauth_client": [

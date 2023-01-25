@@ -3,17 +3,33 @@ import 'package:betting_app/Screens/bottom_navigation_screens/search_screens/sea
 import 'package:betting_app/helpers/utils.dart';
 import 'package:betting_app/widgets/custom_round_button.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../entity/app_user.dart';
+import '../../../helpers/add_manager.dart';
 import '../../../helpers/constant.dart';
 import '../../../helpers/screen_navigation.dart';
 import '../../../provider/user_provider.dart';
 import 'invite_friends.dart';
 
-class EarnScreen extends StatelessWidget {
+class EarnScreen extends StatefulWidget {
   const EarnScreen({super.key, required this.user, required this.userProvider});
   static String id = 'earn';
   final AppUser? user;
   final UserProvider? userProvider;
+
+  @override
+  State<EarnScreen> createState() => _EarnScreenState();
+}
+
+class _EarnScreenState extends State<EarnScreen> {
+  final adManager = AdManager();
+
+  @override
+  void initState() {
+    adManager.addAds(true, true, true);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +50,13 @@ class EarnScreen extends StatelessWidget {
             onPressed: () => changeScreen(
                 context,
                 SearchScreen(
-                  user: user,
+                  user: widget.user,
                 ))),
         actions: [
           Row(
             children: [
               Text(
-                user!.wallet.toString(),
+                widget.user!.wallet.toString(),
                 style: TextStyle(
                     color: white, fontSize: 18, fontWeight: FontWeight.bold),
               ),
@@ -95,13 +111,21 @@ class EarnScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: adManager.getBannerAd()?.size.width.toDouble(),
+                      height: adManager.getBannerAd()?.size.height.toDouble(),
+                      child: AdWidget(ad: adManager.getBannerAd()!),
+                    ),
                     CRoundButton(
                         fontSize: 15,
                         height: 50,
                         width: 120,
                         textColor: black,
                         color: yellow,
-                        function: () {},
+                        function: () {
+                          adManager.showRewardedAd(context);
+                        },
                         text: 'Click to watch',
                         active: true),
                     Container(
@@ -158,7 +182,7 @@ class EarnScreen extends StatelessWidget {
                         textColor: black,
                         color: yellow,
                         function: () {
-                          user!.verified
+                          widget.user!.verified
                               ? changeScreen(context, const VerifyBetSCreen())
                               : showSnackBar(
                                   'Reac level 10 to unlock this option',

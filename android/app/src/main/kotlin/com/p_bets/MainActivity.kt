@@ -1,4 +1,4 @@
-package com.example.betting_app
+package com.p_bets
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.engine.FlutterEngine

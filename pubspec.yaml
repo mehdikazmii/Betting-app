@@ -53,6 +53,7 @@ dependencies:
   numberpicker: ^2.1.1
   card_swiper: ^2.0.4
   badges: ^2.0.3
+  google_mobile_ads: ^2.3.0
 
 flutter_native_splash:
   color: "#FFD832"
