@@ -6,17 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-// android id
-// ca-app-pub-5287428334281424/4998691568
-// ios id
-// ca-app-pub-5287428334281424/2803487652
-// ANDROID MENIFEST ID
-// ca-app-pub-5287428334281424~3099286533
-// test app id
-// ca-app-pub-3940256099942544~3347511713
-// test unit id
-// "ca-app-pub-3940256099942544/5224354917"
-
 class AdManager {
   final FirebaseFirestore instance = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -27,8 +16,8 @@ class AdManager {
   void loadRewardedAd() {
     RewardedAd.load(
         adUnitId: Platform.isIOS
-            ? "ca-app-pub-3940256099942544/1712485313"
-            : "ca-app-pub-3940256099942544/5224354917",
+            ? "ca-app-pub-7778426148576726/5836150571"
+            : "ca-app-pub-7778426148576726/7636586900",
         request: const AdRequest(),
         rewardedAdLoadCallback:
             RewardedAdLoadCallback(onAdLoaded: (RewardedAd ad) {
@@ -93,8 +82,8 @@ class AdManager {
   void loadBannerAd() {
     _bannerAd = BannerAd(
       adUnitId: Platform.isIOS
-          ? "ca-app-pub-3940256099942544/2934735716"
-          : "ca-app-pub-3940256099942544/6300978111",
+          ? "ca-app-pub-7778426148576726/2192688533"
+          : "ca-app-pub-7778426148576726/8267142295",
       size: AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),
@@ -105,8 +94,8 @@ class AdManager {
 
   void loadInterstitialAd() {
     String interstitialAdId = Platform.isIOS
-        ? "ca-app-pub-3940256099942544/4411468910"
-        : "ca-app-pub-3940256099942544/1033173712";
+        ? "ca-app-pub-7778426148576726/9775395589"
+        : "ca-app-pub-7778426148576726/5393566940";
 
     InterstitialAd.load(
         adUnitId: interstitialAdId,

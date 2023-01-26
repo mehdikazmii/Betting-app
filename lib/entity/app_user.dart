@@ -7,7 +7,7 @@ class AppUser {
   String bio = "";
   String? country;
   String? email;
-  double wallet = 0;
+  double wallet = 100;
   int level = 1;
   bool verified = false;
   bool refered = false;

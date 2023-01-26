@@ -55,7 +55,7 @@ class UserProvider extends ChangeNotifier {
       }
     }
     if (response is Error) {
-      showSnackBar('${response.message}mehdi', context);
+      showSnackBar('${response.message}', context);
     }
     return response;
   }
